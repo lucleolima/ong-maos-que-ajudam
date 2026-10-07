@@ -105,19 +105,22 @@ test('Teclado: o primeiro Tab mostra "Pular para o conteúdo" e Enter leva o foc
 
 test('Teclado: o submenu abre com o foco e fecha com Esc, devolvendo o foco a "Projetos"', async () => {
   const pagina = await abrir('inicio');
-  const fimDasTransicoes = () => pagina.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished)));
-  const visibilidade = () => pagina.$eval('.submenu', (s) => getComputedStyle(s).visibility);
+  // Espera o estado em vez de ler na hora: logo depois da tecla o estilo pode ainda não ter
+  // sido recalculado (o teste falhava de vez em quando). Se não chegar em 2 s, falha.
+  const esperarVisibilidade = (valor) => pagina.waitForFunction(
+    (v) => getComputedStyle(document.querySelector('.submenu')).visibility === v,
+    { timeout: 2000 }, valor);
 
-  // Caminho real do teclado: foco em "Projetos" abre o submenu e o Tab entra nele
+  // Caminho real do teclado: foco em "Projetos" abre o submenu e o Tab entra nele.
+  // Esperar o submenu aparecer antes do Tab imita uma pessoa: apertando Tab no mesmo
+  // instante do foco, o navegador ainda não desenhou o submenu e pula para "Cadastro".
   await pagina.focus('.menu-link[data-rota="projetos"]');
+  await esperarVisibilidade('visible');
   await pagina.keyboard.press('Tab');
-  await fimDasTransicoes();
-  assert.equal(await visibilidade(), 'visible');
   assert.equal(await pagina.evaluate(() => document.activeElement.textContent), 'Aprender Juntos');
 
   await pagina.keyboard.press('Escape');
-  await fimDasTransicoes();
-  assert.equal(await visibilidade(), 'hidden');
+  await esperarVisibilidade('hidden');
   assert.equal(await pagina.evaluate(() => document.activeElement.dataset.rota), 'projetos');
   await pagina.close();
 });
