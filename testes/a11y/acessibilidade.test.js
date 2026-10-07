@@ -49,7 +49,12 @@ let navegador;
 before(async () => {
   servidor = criarServidor(PASTA);
   await new Promise((pronto) => servidor.listen(PORTA, pronto));
-  navegador = await puppeteer.launch({ executablePath: caminhoDoChrome(), headless: true });
+  navegador = await puppeteer.launch({
+    executablePath: caminhoDoChrome(),
+    headless: true,
+    // O Ubuntu do GitHub Actions bloqueia a sandbox do Chrome; no CI a máquina já é isolada
+    args: process.env.CI ? ['--no-sandbox'] : []
+  });
 });
 
 after(async () => {
