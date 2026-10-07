@@ -5,6 +5,7 @@
 import { criarRoteador } from './modulos/roteador.js';
 import { iniciarMenu, fecharMenu, destacarLinkAtual } from './modulos/menu.js';
 import { iniciarModais, fecharModais } from './modulos/feedback.js';
+import { iniciarPreferencias } from './modulos/preferencias.js';
 import { cadastros, EVENTO_CADASTROS_ALTERADOS } from './modulos/cadastros.js';
 import { montarProjetos } from './modulos/projetos.js';
 import { montarCadastro } from './modulos/formulario.js';
@@ -36,6 +37,7 @@ function iniciarPularConteudo() {
 }
 
 iniciarMenu();
+iniciarPreferencias();
 iniciarModais();
 iniciarPularConteudo();
 

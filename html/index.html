@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/componentes.css">
   <link rel="stylesheet" href="../css/interatividade.css">
+  <!-- Temas escuro e de alto contraste (só redefinem as variáveis) -->
+  <link rel="stylesheet" href="../css/temas.css">
+  <!-- Script comum (bloqueante de propósito): aplica o tema antes de desenhar a página -->
+  <script src="../js/tema-inicial.js"></script>
   <!-- Biblioteca externa IMask (máscaras de entrada). Se não carregar, js/modulos/mascaras.js usa máscaras próprias -->
   <script src="https://cdn.jsdelivr.net/npm/imask@7.6.1/dist/imask.min.js" defer></script>
   <!-- type="module": habilita import/export entre os arquivos de js/ (já é defer por padrão) -->
@@ -58,6 +62,23 @@
           </li>
         </ul>
       </nav>
+
+      <!-- aria-pressed informa ao leitor de tela se a opção está ligada -->
+      <div class="preferencias" role="group" aria-label="Preferências de exibição">
+        <button class="botao-preferencia" type="button" data-preferencia="tema" aria-pressed="false" title="Modo escuro">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+          <span class="sr-only">Modo escuro</span>
+        </button>
+        <button class="botao-preferencia" type="button" data-preferencia="contraste" aria-pressed="false" title="Alto contraste">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path fill="currentColor" d="M12 3a9 9 0 0 1 0 18z"/>
+          </svg>
+          <span class="sr-only">Alto contraste</span>
+        </button>
+      </div>
     </div>
   </header>
 

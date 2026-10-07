@@ -88,7 +88,7 @@
 /* Página atual */
 .menu-link[aria-current="page"] {
   background-color: var(--cor-primaria);
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
 }
 
 .submenu {
@@ -175,6 +175,12 @@
     visibility: visible;
     transform: translateY(0);
   }
+
+  /* Fechado com Esc (js/modulos/menu.js), mesmo com o mouse ou o foco em cima */
+  .menu-item-com-submenu.submenu-fechado > .submenu {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 /* ==========================================================================
@@ -218,22 +224,22 @@
 
 .botao-primario {
   background-color: var(--cor-primaria);
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
 }
 
 .botao-primario:hover {
   background-color: var(--cor-primaria-escura);
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
 }
 
 .botao-secundario {
   background-color: var(--cor-secundaria);
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
 }
 
 .botao-secundario:hover {
-  background-color: #23633e;
-  color: var(--cor-superficie);
+  background-color: var(--cor-secundaria-escura);
+  color: var(--cor-texto-inverso);
 }
 
 .botao-contorno {
@@ -259,13 +265,13 @@
 }
 
 .botao-contorno-claro {
-  color: var(--cor-superficie);
-  border-color: var(--cor-superficie);
+  color: var(--cor-sobre-hero);
+  border-color: var(--cor-sobre-hero);
 }
 
 .botao-contorno-claro:hover {
   background-color: rgba(255, 255, 255, 0.15);
-  color: var(--cor-superficie);
+  color: var(--cor-sobre-hero);
 }
 
 .grupo-botoes {
@@ -383,7 +389,7 @@
   height: 40px;
   margin-bottom: var(--esp-3);
   font-weight: var(--peso-forte);
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
   background-color: var(--cor-primaria);
   border-radius: 50%;
 }
@@ -494,7 +500,7 @@
   font: inherit;
   color: var(--cor-texto);
   background-color: var(--cor-superficie);
-  border: 2px solid var(--cor-borda);
+  border: 2px solid var(--cor-borda-campo);
   border-radius: var(--raio-md);
   transition: border-color var(--transicao), box-shadow var(--transicao);
 }
@@ -513,7 +519,7 @@
 .formulario select:focus,
 .formulario textarea:focus {
   border-color: var(--cor-primaria);
-  box-shadow: 0 0 0 3px rgba(30, 111, 184, 0.25);
+  box-shadow: var(--sombra-campo-foco);
   outline: none;
 }
 
@@ -608,7 +614,7 @@
   gap: var(--esp-2);
   padding: var(--esp-3) var(--esp-4);
   font-weight: var(--peso-medio);
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
   background-color: var(--cor-secundaria); /* verde de sucesso: se destaca até sobre o rodapé escuro */
   border-radius: var(--raio-md);
   box-shadow: var(--sombra-lg);
@@ -651,6 +657,7 @@
   width: min(90vw, 480px);
   padding: 0;
   color: var(--cor-texto);
+  background-color: var(--cor-superficie); /* o padrão do navegador é branco fixo */
   border: none;
   border-radius: var(--raio-lg);
   box-shadow: var(--sombra-lg);
@@ -661,7 +668,7 @@
 }
 
 .modal::backdrop {
-  background-color: rgba(31, 41, 51, 0.6);
+  background-color: var(--cor-fundo-modal);
 }
 
 .modal-conteudo {
