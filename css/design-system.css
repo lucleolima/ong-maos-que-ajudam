@@ -33,6 +33,24 @@
   --cor-fundo: #f5f7fa;
   --cor-superficie: #ffffff;
 
+  /* Texto sobre fundos coloridos (botões, menu ativo, toast). Antes era --cor-superficie,
+     mas no modo escuro a superfície fica escura e o texto precisa continuar legível */
+  --cor-texto-inverso: #ffffff;
+
+  /* ---------- Tons de hover ---------- */
+  --cor-secundaria-escura: #23633e;
+  --cor-erro-escura: #8c1d17;
+
+  /* ---------- Áreas fixas ---------- */
+  --fundo-hero: linear-gradient(135deg, #15528a, #1e6fb8);
+  --cor-sobre-hero: #ffffff;
+  --cor-rodape-fundo: #1f2933;
+  --cor-rodape-texto: #e4e7eb;
+  --cor-rodape-destaque: #ffffff;
+  --cor-rodape-divisoria: rgba(255, 255, 255, 0.2);
+  --cor-fundo-modal: rgba(31, 41, 51, 0.6);
+  --sombra-campo-foco: 0 0 0 3px rgba(30, 111, 184, 0.25);
+
   /* ---------- Foco do teclado ----------
      O laranja antigo (#f2a33a) tinha só 2.08:1 sobre o branco.
      Azul escuro: 8.06:1 no branco; nas faixas escuras (hero e rodapé) vira amarelo. */

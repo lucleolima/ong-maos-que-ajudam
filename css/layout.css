@@ -168,12 +168,12 @@
 /* Faixa de destaque do topo (hero) */
 .hero {
   padding-block: var(--esp-6);
-  background: linear-gradient(135deg, var(--cor-primaria-escura), var(--cor-primaria));
-  color: var(--cor-superficie);
+  background: var(--fundo-hero);
+  color: var(--cor-sobre-hero);
 }
 
 .hero h1 {
-  color: var(--cor-superficie);
+  color: var(--cor-sobre-hero);
 }
 
 .hero p {
@@ -195,17 +195,17 @@
 
 .rodape {
   padding-block: var(--esp-6) var(--esp-4);
-  background-color: var(--cor-texto);
-  color: #e4e7eb;
+  background-color: var(--cor-rodape-fundo);
+  color: var(--cor-rodape-texto);
 }
 
 .rodape a {
-  color: #ffffff;
+  color: var(--cor-rodape-destaque);
 }
 
 .rodape h2 {
   font-size: var(--fonte-md);
-  color: #ffffff;
+  color: var(--cor-rodape-destaque);
 }
 
 .rodape address {
@@ -215,6 +215,6 @@
 .rodape-direitos {
   margin-top: var(--esp-5);
   padding-top: var(--esp-3);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid var(--cor-rodape-divisoria);
   text-align: center;
 }

@@ -30,7 +30,7 @@ h1[tabindex="-1"]:focus,
   padding-inline: 6px;
   font-size: var(--fonte-xs);
   font-weight: var(--peso-forte);
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
   background-color: var(--cor-secundaria);
   border-radius: var(--raio-pilula);
 }
@@ -42,14 +42,14 @@ h1[tabindex="-1"]:focus,
 /* ---------- Botões extras ---------- */
 
 .botao-perigo {
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
   background-color: var(--cor-erro);
   border-color: var(--cor-erro);
 }
 
 .botao-perigo:hover {
-  background-color: #8c1d17;
-  border-color: #8c1d17;
+  background-color: var(--cor-erro-escura);
+  border-color: var(--cor-erro-escura);
 }
 
 .botao-pequeno {
@@ -87,7 +87,7 @@ h1[tabindex="-1"]:focus,
 
 /* aria-pressed indica o filtro ativo para o leitor de tela e para o CSS ao mesmo tempo */
 .botao-filtro[aria-pressed="true"] {
-  color: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
   background-color: var(--cor-primaria);
   border-color: var(--cor-primaria);
 }
@@ -111,7 +111,7 @@ h1[tabindex="-1"]:focus,
 .barra-filtros input[type="search"]:focus,
 .barra-filtros select:focus {
   border-color: var(--cor-primaria);
-  box-shadow: 0 0 0 3px rgba(30, 111, 184, 0.25);
+  box-shadow: var(--sombra-campo-foco);
   outline: none;
 }
 
