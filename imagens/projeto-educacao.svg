@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240" role="img" aria-labelledby="titulo">
+  <title id="titulo">Ilustração de livros abertos</title>
+  <rect width="400" height="240" fill="#fff4e0"/>
+  <path d="M200 70 C160 55 110 55 80 65 V185 C110 175 160 175 200 190 Z" fill="#f2a33a"/>
+  <path d="M200 70 C240 55 290 55 320 65 V185 C290 175 240 175 200 190 Z" fill="#d9822b"/>
+</svg>

@@ -1,0 +1,10 @@
+{
+  "name": "ong-maos-que-ajudam-js",
+  "version": "3.0.0",
+  "description": "SPA da ONG Mãos que Ajudam (Experiência Prática 3 de Desenvolvimento Front-End)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"testes/*.test.js\""
+  }
+}

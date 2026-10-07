@@ -1,0 +1,236 @@
+/* ==========================================================================
+   INTERATIVIDADE
+   Estilos dos estados criados pelo JavaScript na Experiência Prática 3:
+   validação por campo, filtros, contador do menu, inscrições e transição de página.
+   ========================================================================== */
+
+/* ---------- Transição entre páginas da SPA ---------- */
+
+#conteudo > * {
+  animation: aparecer 0.3s ease-out;
+}
+
+/* Títulos e containers que recebem foco por código não precisam do contorno */
+#conteudo:focus,
+h1[tabindex="-1"]:focus,
+.resultado-contagem:focus,
+.alerta:focus {
+  outline: none;
+}
+
+/* ---------- Contador de inscrições no menu ---------- */
+
+.contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  margin-left: var(--esp-1);
+  padding-inline: 6px;
+  font-size: var(--fonte-xs);
+  font-weight: var(--peso-forte);
+  color: var(--cor-superficie);
+  background-color: var(--cor-secundaria);
+  border-radius: var(--raio-pilula);
+}
+
+.contador[hidden] {
+  display: none;
+}
+
+/* ---------- Botões extras ---------- */
+
+.botao-perigo {
+  color: var(--cor-superficie);
+  background-color: var(--cor-erro);
+  border-color: var(--cor-erro);
+}
+
+.botao-perigo:hover {
+  background-color: #8c1d17;
+  border-color: #8c1d17;
+}
+
+.botao-pequeno {
+  min-height: 36px;
+  padding: var(--esp-1) var(--esp-3);
+  font-size: var(--fonte-sm);
+}
+
+/* ---------- Filtros e busca ---------- */
+
+.barra-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  margin-bottom: var(--esp-3);
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+}
+
+.botao-filtro {
+  color: var(--cor-primaria-escura);
+  background-color: var(--cor-superficie);
+  border-color: var(--cor-borda);
+}
+
+.botao-filtro:hover {
+  border-color: var(--cor-primaria);
+}
+
+/* aria-pressed indica o filtro ativo para o leitor de tela e para o CSS ao mesmo tempo */
+.botao-filtro[aria-pressed="true"] {
+  color: var(--cor-superficie);
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+
+.campo-busca {
+  flex: 1 1 240px;
+  max-width: 360px;
+}
+
+.barra-filtros input[type="search"],
+.barra-filtros select {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--esp-2) var(--esp-3);
+  font: inherit;
+  background-color: var(--cor-superficie);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+}
+
+.barra-filtros input[type="search"]:focus,
+.barra-filtros select:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(30, 111, 184, 0.25);
+  outline: none;
+}
+
+.barra-filtros .campo {
+  grid-column: auto;
+}
+
+.barra-filtros label {
+  font-weight: var(--peso-medio);
+}
+
+.resultado-contagem {
+  margin-bottom: var(--esp-4);
+  font-size: var(--fonte-sm);
+  color: var(--cor-texto-suave);
+}
+
+.estado-vazio {
+  padding: var(--esp-6) var(--esp-4);
+  text-align: center;
+  background-color: var(--cor-superficie);
+  border: 2px dashed var(--cor-borda);
+  border-radius: var(--raio-lg);
+}
+
+.estado-vazio-titulo {
+  font-size: var(--fonte-md);
+  font-weight: var(--peso-forte);
+}
+
+/* ---------- Validação do formulário (controlada por js/modulos/formulario.js) ---------- */
+
+.formulario [aria-invalid="true"] {
+  border-color: var(--cor-erro);
+  background-color: var(--cor-erro-clara);
+}
+
+.formulario input[aria-invalid="false"],
+.formulario select[aria-invalid="false"] {
+  border-color: var(--cor-sucesso);
+}
+
+.formulario fieldset[aria-invalid="true"] {
+  border-style: solid;
+}
+
+.mensagem-erro.visivel {
+  display: block;
+}
+
+.alerta .lista-erros {
+  margin: var(--esp-2) 0 0;
+  padding-left: var(--esp-4);
+}
+
+.alerta .lista-erros a {
+  color: inherit;
+  font-weight: var(--peso-medio);
+}
+
+/* ---------- Lista de inscrições ---------- */
+
+.lista-inscricoes {
+  display: grid;
+  gap: var(--esp-4);
+}
+
+@media (min-width: 768px) {
+  .lista-inscricoes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* O estado vazio ocupa a linha inteira */
+  .lista-inscricoes > .item-vazio {
+    grid-column: 1 / -1;
+  }
+}
+
+.cartao-inscricao-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-2);
+  margin-bottom: var(--esp-3);
+}
+
+.cartao-inscricao-topo h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.dados-inscricao {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--esp-1) var(--esp-3);
+  margin: 0 0 var(--esp-3);
+  font-size: var(--fonte-sm);
+}
+
+.dados-inscricao dt {
+  font-weight: var(--peso-medio);
+  color: var(--cor-texto-suave);
+}
+
+.dados-inscricao dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Modal de confirmação ---------- */
+
+.modal-icone-aviso {
+  color: var(--cor-erro);
+  background-color: var(--cor-erro-clara);
+}
+
+.campo-consentimento {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+}

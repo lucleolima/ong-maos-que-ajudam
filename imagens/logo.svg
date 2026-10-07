@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-labelledby="titulo">
+  <title id="titulo">Logo da ONG Mãos que Ajudam</title>
+  <circle cx="60" cy="60" r="56" fill="#1e6fb8"/>
+  <path d="M60 92 C30 70 24 52 36 40 C46 30 56 36 60 44 C64 36 74 30 84 40 C96 52 90 70 60 92 Z" fill="#ffffff"/>
+</svg>

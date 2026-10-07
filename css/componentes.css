@@ -1,0 +1,698 @@
+/* ==========================================================================
+   COMPONENTES - peças reutilizáveis da interface
+   Navegação, botões, cartões, badges, formulários, alertas, toast e modal.
+   ========================================================================== */
+
+/* ==========================================================================
+   NAVEGAÇÃO
+   Celular: botão "hambúrguer" abre o menu em lista vertical.
+   A partir de 768px: menu horizontal com submenu suspenso (dropdown).
+   ========================================================================== */
+
+.botao-menu {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  padding: var(--esp-2) var(--esp-3);
+  font: inherit;
+  font-weight: var(--peso-medio);
+  color: var(--cor-primaria-escura);
+  background: none;
+  border: 2px solid var(--cor-primaria);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+}
+
+/* Ícone de três linhas desenhado com CSS */
+.botao-menu-icone,
+.botao-menu-icone::before,
+.botao-menu-icone::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: currentColor;
+  transition: transform var(--transicao);
+}
+
+.botao-menu-icone {
+  position: relative;
+}
+
+.botao-menu-icone::before,
+.botao-menu-icone::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.botao-menu-icone::before { top: -6px; }
+.botao-menu-icone::after  { top: 6px; }
+
+/* Vira um "X" quando o menu está aberto */
+.botao-menu[aria-expanded="true"] .botao-menu-icone {
+  background-color: transparent;
+}
+
+.botao-menu[aria-expanded="true"] .botao-menu-icone::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.botao-menu[aria-expanded="true"] .botao-menu-icone::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.menu-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-link {
+  display: block;
+  padding: var(--esp-2) var(--esp-3);
+  font-weight: var(--peso-medio);
+  color: var(--cor-texto);
+  text-decoration: none;
+  border-radius: var(--raio-md);
+  transition: background-color var(--transicao), color var(--transicao);
+}
+
+.menu-link:hover {
+  background-color: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
+}
+
+/* Página atual */
+.menu-link[aria-current="page"] {
+  background-color: var(--cor-primaria);
+  color: var(--cor-superficie);
+}
+
+.submenu {
+  margin: 0;
+  padding: 0 0 0 var(--esp-3);
+  list-style: none;
+}
+
+.submenu a {
+  display: block;
+  padding: var(--esp-2) var(--esp-3);
+  font-size: var(--fonte-sm);
+  color: var(--cor-texto-suave);
+  text-decoration: none;
+  border-radius: var(--raio-md);
+}
+
+.submenu a:hover {
+  background-color: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
+}
+
+/* ---------- Celular (até 767px) ---------- */
+@media (max-width: 767px) {
+  /* Com JavaScript ativo, o menu começa fechado; sem JS ele fica sempre visível */
+  .js .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: var(--z-menu);
+    padding: var(--esp-3);
+    background-color: var(--cor-superficie);
+    box-shadow: var(--sombra-md);
+    display: none;
+  }
+
+  .js .menu.menu-aberto {
+    display: block;
+    animation: aparecer 0.2s ease-out;
+  }
+}
+
+/* ---------- Tablet e desktop (768px+) ---------- */
+@media (min-width: 768px) {
+  .botao-menu {
+    display: none;
+  }
+
+  .menu-lista {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .menu-item-com-submenu {
+    position: relative;
+  }
+
+  .menu-item-com-submenu > .menu-link::after {
+    content: " \25BE"; /* seta para baixo */
+    font-size: var(--fonte-xs);
+  }
+
+  /* Dropdown: aparece no hover do mouse e também no foco do teclado */
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: var(--z-menu);
+    min-width: 220px;
+    padding: var(--esp-2);
+    background-color: var(--cor-superficie);
+    border-radius: var(--raio-md);
+    box-shadow: var(--sombra-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity var(--transicao), transform var(--transicao), visibility var(--transicao);
+  }
+
+  .menu-item-com-submenu:hover > .submenu,
+  .menu-item-com-submenu:focus-within > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   BOTÕES
+   ========================================================================== */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--esp-2);
+  min-height: 44px; /* área de toque confortável */
+  padding: var(--esp-2) var(--esp-4);
+  font: inherit;
+  font-weight: var(--peso-medio);
+  line-height: 1.2;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: background-color var(--transicao), color var(--transicao),
+              border-color var(--transicao), transform var(--transicao), box-shadow var(--transicao);
+}
+
+.botao:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-md);
+}
+
+.botao:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.botao:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.botao-primario {
+  background-color: var(--cor-primaria);
+  color: var(--cor-superficie);
+}
+
+.botao-primario:hover {
+  background-color: var(--cor-primaria-escura);
+  color: var(--cor-superficie);
+}
+
+.botao-secundario {
+  background-color: var(--cor-secundaria);
+  color: var(--cor-superficie);
+}
+
+.botao-secundario:hover {
+  background-color: #23633e;
+  color: var(--cor-superficie);
+}
+
+.botao-contorno {
+  background-color: transparent;
+  color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+
+.botao-contorno:hover {
+  background-color: var(--cor-primaria-clara);
+  color: var(--cor-primaria-escura);
+}
+
+/* Versão para fundos escuros (ex.: hero) */
+.botao-claro {
+  background-color: var(--cor-superficie);
+  color: var(--cor-primaria-escura);
+}
+
+.botao-claro:hover {
+  background-color: var(--cor-destaque-clara);
+  color: var(--cor-primaria-escura);
+}
+
+.botao-contorno-claro {
+  color: var(--cor-superficie);
+  border-color: var(--cor-superficie);
+}
+
+.botao-contorno-claro:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--cor-superficie);
+}
+
+.grupo-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-3);
+}
+
+.grupo-botoes-centro {
+  justify-content: center;
+}
+
+/* ==========================================================================
+   CARTÕES
+   ========================================================================== */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-sm);
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-lg);
+}
+
+.card-imagem {
+  margin: 0;
+}
+
+.card-imagem img {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+}
+
+.card-imagem figcaption {
+  padding: var(--esp-2) var(--esp-4) 0;
+  font-size: var(--fonte-xs);
+  color: var(--cor-texto-suave);
+}
+
+/* Botão solto dentro do cartão não estica na largura toda (efeito do flex-direction: column) */
+.card > .botao {
+  align-self: flex-start;
+}
+
+/* flex: 1 empurra o rodapé do cartão para baixo, alinhando cartões vizinhos */
+.card-corpo {
+  flex: 1;
+  padding: var(--esp-4);
+}
+
+.card-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-2);
+  padding: var(--esp-3) var(--esp-4);
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* Cartão de número (seção "Nosso impacto") */
+.card-numero {
+  padding: var(--esp-5) var(--esp-4);
+  text-align: center;
+  border-top: 4px solid var(--cor-secundaria);
+}
+
+.card-numero strong {
+  display: block;
+  font-size: var(--fonte-xxl);
+  line-height: 1.1;
+  color: var(--cor-secundaria);
+}
+
+/* Cartão simples, sem imagem (missão, visão, valores, doações) */
+.card-simples {
+  padding: var(--esp-4);
+  border-left: 4px solid var(--cor-primaria);
+}
+
+/* Lista sem marcadores para listas de números dentro de grid */
+.lista-limpa {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Passo a passo numerado com contador CSS (a lista perde os números nativos) */
+.passos {
+  counter-reset: passo;
+}
+
+/* display: block evita que o Flexbox do .card separe texto e link em linhas */
+.passos li {
+  display: block;
+  counter-increment: passo;
+}
+
+.passos li::before {
+  content: counter(passo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--esp-3);
+  font-weight: var(--peso-forte);
+  color: var(--cor-superficie);
+  background-color: var(--cor-primaria);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   BADGES E TAGS
+   ========================================================================== */
+
+.badge {
+  display: inline-block;
+  padding: var(--esp-1) var(--esp-3);
+  font-size: var(--fonte-sm);
+  font-weight: var(--peso-medio);
+  line-height: 1.4;
+  border-radius: var(--raio-pilula);
+}
+
+.badge-sucesso { background-color: var(--cor-secundaria-clara); color: var(--cor-secundaria); }
+.badge-info    { background-color: var(--cor-primaria-clara); color: var(--cor-primaria-escura); }
+.badge-aviso   { background-color: var(--cor-aviso-clara); color: var(--cor-aviso); }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2);
+  margin: 0 0 var(--esp-3);
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 2px var(--esp-2);
+  font-size: var(--fonte-xs);
+  color: var(--cor-texto-suave);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-sm);
+}
+
+/* ==========================================================================
+   FORMULÁRIOS
+   ========================================================================== */
+
+.formulario {
+  display: grid;
+  gap: var(--esp-4);
+}
+
+.formulario fieldset {
+  margin: 0;
+  padding: var(--esp-4);
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-lg);
+}
+
+.formulario legend {
+  padding-inline: var(--esp-2);
+  font-size: var(--fonte-md);
+  font-weight: var(--peso-forte);
+  color: var(--cor-primaria-escura);
+}
+
+/* Fieldset dentro de fieldset (rádios e checkboxes) */
+.formulario fieldset fieldset {
+  padding: var(--esp-3);
+  border-style: dashed;
+}
+
+.formulario fieldset fieldset legend {
+  font-size: var(--fonte-base);
+  color: var(--cor-texto);
+}
+
+/* Campos do fieldset em grid: lado a lado a partir de 768px */
+.campos {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--esp-3);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-1);
+  grid-column: span 12;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .campo-metade { grid-column: span 6; }
+  .campo-terco  { grid-column: span 4; }
+  .campo-dois-tercos { grid-column: span 8; }
+}
+
+.campo label {
+  font-weight: var(--peso-medio);
+}
+
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario input[type="tel"],
+.formulario input[type="date"],
+.formulario select,
+.formulario textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--esp-2) var(--esp-3);
+  font: inherit;
+  color: var(--cor-texto);
+  background-color: var(--cor-superficie);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+
+.formulario textarea {
+  resize: vertical;
+}
+
+.formulario input:hover,
+.formulario select:hover,
+.formulario textarea:hover {
+  border-color: var(--cor-texto-suave);
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(30, 111, 184, 0.25);
+  outline: none;
+}
+
+/* Rádios e checkboxes: alinhados com Flexbox */
+.opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-2) var(--esp-4);
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+}
+
+.opcao input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--cor-primaria);
+}
+
+/* Os estados de erro e sucesso dos campos ficam em interatividade.css,
+   porque agora são controlados pelo JavaScript (aria-invalid). */
+
+.mensagem-erro {
+  display: none;
+  font-size: var(--fonte-sm);
+  color: var(--cor-erro);
+}
+
+.mensagem-erro::before {
+  content: "\26A0  "; /* símbolo de alerta */
+}
+
+.dica-campo {
+  font-size: var(--fonte-sm);
+  color: var(--cor-texto-suave);
+}
+
+/* ==========================================================================
+   ALERTAS
+   ========================================================================== */
+
+.alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--esp-3);
+  margin-bottom: var(--esp-4);
+  padding: var(--esp-3) var(--esp-4);
+  border-left: 4px solid currentColor;
+  border-radius: var(--raio-md);
+}
+
+.alerta::before {
+  flex-shrink: 0;
+  font-size: var(--fonte-md);
+  line-height: 1.2;
+}
+
+.alerta p {
+  margin: 0;
+}
+
+.alerta-info    { background-color: var(--cor-primaria-clara); color: var(--cor-primaria-escura); }
+.alerta-sucesso { background-color: var(--cor-secundaria-clara); color: var(--cor-secundaria); }
+.alerta-aviso   { background-color: var(--cor-aviso-clara); color: var(--cor-aviso); }
+.alerta-erro    { background-color: var(--cor-erro-clara); color: var(--cor-erro); }
+
+.alerta-info::before    { content: "\2139"; }  /* i */
+.alerta-sucesso::before { content: "\2714"; }  /* ✔ */
+.alerta-aviso::before   { content: "\26A0"; }  /* ⚠ */
+.alerta-erro::before    { content: "\2716"; }  /* ✖ */
+
+.alerta[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   TOAST (notificação temporária)
+   ========================================================================== */
+
+.toast {
+  position: fixed;
+  right: var(--esp-3);
+  bottom: var(--esp-3);
+  left: var(--esp-3);
+  z-index: var(--z-toast);
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  padding: var(--esp-3) var(--esp-4);
+  font-weight: var(--peso-medio);
+  color: var(--cor-superficie);
+  background-color: var(--cor-secundaria); /* verde de sucesso: se destaca até sobre o rodapé escuro */
+  border-radius: var(--raio-md);
+  box-shadow: var(--sombra-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity var(--transicao), transform var(--transicao), visibility var(--transicao);
+}
+
+.toast::before {
+  content: "\2714"; /* ✔ */
+}
+
+.toast-erro {
+  background-color: var(--cor-erro);
+}
+
+.toast-erro::before {
+  content: "\26A0"; /* ⚠ */
+}
+
+.toast-visivel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+@media (min-width: 480px) {
+  .toast {
+    left: auto;
+    max-width: 360px;
+  }
+}
+
+/* ==========================================================================
+   MODAL (elemento nativo dialog)
+   ========================================================================== */
+
+.modal {
+  width: min(90vw, 480px);
+  padding: 0;
+  color: var(--cor-texto);
+  border: none;
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-lg);
+}
+
+.modal[open] {
+  animation: aparecer 0.25s ease-out;
+}
+
+.modal::backdrop {
+  background-color: rgba(31, 41, 51, 0.6);
+}
+
+.modal-conteudo {
+  padding: var(--esp-5);
+  text-align: center;
+}
+
+.modal-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--esp-3);
+  font-size: var(--fonte-xl);
+  color: var(--cor-secundaria);
+  background-color: var(--cor-secundaria-clara);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   ANIMAÇÕES
+   ========================================================================== */
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

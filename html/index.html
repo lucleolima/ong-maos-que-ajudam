@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ONG Mãos que Ajudam: conheça nossos projetos sociais e cadastre-se como voluntário ou doador.">
+  <title>ONG Mãos que Ajudam</title>
+  <link rel="icon" href="../imagens/logo.svg" type="image/svg+xml">
+  <!-- Ordem dos estilos: variáveis e base, layout, componentes e, por último, os estados criados pelo JS -->
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <link rel="stylesheet" href="../css/interatividade.css">
+  <!-- Biblioteca externa IMask (máscaras de entrada). Se não carregar, js/modulos/mascaras.js usa máscaras próprias -->
+  <script src="https://cdn.jsdelivr.net/npm/imask@7.6.1/dist/imask.min.js" defer></script>
+  <!-- type="module": habilita import/export entre os arquivos de js/ (já é defer por padrão) -->
+  <script src="../js/main.js" type="module"></script>
+</head>
+<body>
+
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- Cabeçalho e rodapé são fixos; só o <main> é trocado pelo roteador -->
+  <header class="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a class="marca" href="#/inicio">
+        <picture>
+          <source srcset="../imagens/logo.svg" type="image/svg+xml">
+          <img src="../imagens/logo.png" alt="" width="80" height="80">
+        </picture>
+        ONG Mãos que Ajudam
+      </a>
+
+      <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="botao-menu-icone" aria-hidden="true"></span>
+        Menu
+      </button>
+
+      <nav id="menu-principal" class="menu" aria-label="Navegação principal">
+        <ul class="menu-lista">
+          <li><a class="menu-link" href="#/inicio" data-rota="inicio">Início</a></li>
+          <li class="menu-item-com-submenu">
+            <a class="menu-link" href="#/projetos" data-rota="projetos">Projetos</a>
+            <ul class="submenu">
+              <li><a href="#/projetos/projeto-educacao">Aprender Juntos</a></li>
+              <li><a href="#/projetos/projeto-alimentacao">Mesa Solidária</a></li>
+              <li><a href="#/projetos/projeto-convivencia">Sábado em Comunidade</a></li>
+              <li><a href="#/projetos/voluntariado">Seja voluntário</a></li>
+              <li><a href="#/projetos/doacoes">Faça uma doação</a></li>
+            </ul>
+          </li>
+          <li><a class="menu-link" href="#/cadastro" data-rota="cadastro">Cadastro</a></li>
+          <li>
+            <a class="menu-link" href="#/inscricoes" data-rota="inscricoes">
+              Inscrições
+              <span class="contador" data-contador-inscricoes hidden></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo gerado pelos templates de js/templates/paginas.js -->
+  <main id="conteudo" tabindex="-1">
+    <noscript>
+      <div class="container secao">
+        <div class="alerta alerta-aviso">
+          <p>Este site precisa de JavaScript para funcionar. Ative-o no navegador para ver o conteúdo.</p>
+        </div>
+      </div>
+    </noscript>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <div class="grid">
+        <div class="col-md-6">
+          <h2>ONG Mãos que Ajudam</h2>
+          <p>Transformando a comunidade desde 2010 com educação, alimentação e convivência.</p>
+        </div>
+        <address class="col-md-6">
+          Rua das Flores, 123, Centro, São Paulo - SP<br>
+          E-mail: <a href="mailto:contato@maosqueajudam.org">contato@maosqueajudam.org</a><br>
+          Telefone: <a href="tel:+551130000000">(11) 3000-0000</a>
+        </address>
+      </div>
+      <p class="rodape-direitos"><small>&copy; 2026 ONG Mãos que Ajudam. Todos os direitos reservados.</small></p>
+    </div>
+  </footer>
+
+  <!-- Toast: role="status" faz o leitor de tela anunciar a mensagem sem roubar o foco -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Modal de sucesso do cadastro -->
+  <dialog id="modal-sucesso" class="modal" aria-labelledby="modal-sucesso-titulo">
+    <div class="modal-conteudo">
+      <span class="modal-icone" aria-hidden="true">&#10004;</span>
+      <h2 id="modal-sucesso-titulo">Obrigado, <span data-nome></span>!</h2>
+      <p>Seu cadastro foi salvo. Nossa equipe entrará em contato em até 5 dias úteis.</p>
+      <form method="dialog" class="grupo-botoes grupo-botoes-centro">
+        <a class="botao botao-contorno" href="#/inscricoes">Ver inscrições</a>
+        <button class="botao botao-primario">Fechar</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Modal de confirmação: substitui o confirm() do navegador. O botão clicado vira o returnValue -->
+  <dialog id="modal-confirmacao" class="modal" aria-labelledby="modal-confirmacao-titulo">
+    <form method="dialog" class="modal-conteudo">
+      <span class="modal-icone modal-icone-aviso" aria-hidden="true">&#9888;</span>
+      <h2 id="modal-confirmacao-titulo" data-titulo></h2>
+      <p data-mensagem></p>
+      <div class="grupo-botoes grupo-botoes-centro">
+        <button class="botao botao-contorno" value="cancelar">Cancelar</button>
+        <button class="botao botao-perigo" value="confirmar">Confirmar</button>
+      </div>
+    </form>
+  </dialog>
+
+</body>
+</html>

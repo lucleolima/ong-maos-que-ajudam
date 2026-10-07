@@ -1,0 +1,220 @@
+/* ==========================================================================
+   LAYOUT - estrutura macro das páginas
+   Abordagem mobile-first: o CSS base vale para celular e cada breakpoint
+   (min-width) acrescenta ajustes para telas maiores.
+
+   Breakpoints:
+     até 479px   celulares pequenos (base, sem media query)
+     sm  480px   celulares grandes
+     md  768px   tablets
+     lg  1024px  notebooks
+     xl  1280px  desktops
+     xxl 1440px  telas panorâmicas (widescreen)
+   ========================================================================== */
+
+/* ---------- Container centralizado ---------- */
+.container {
+  width: 100%;
+  max-width: var(--largura-maxima);
+  margin-inline: auto;
+  padding-inline: var(--esp-3);
+}
+
+@media (min-width: 768px) {
+  .container { padding-inline: var(--esp-5); }
+}
+
+/* ==========================================================================
+   GRID DE 12 COLUNAS
+   .grid cria 12 trilhas iguais; cada filho escolhe quantas ocupa com
+   .col-N (todas as telas) ou .col-{bp}-N (a partir daquele breakpoint).
+   Sem classe, o item ocupa a linha inteira (12 colunas).
+   ========================================================================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--esp-4);
+}
+
+.grid > * {
+  grid-column: span 12;
+}
+
+.col-1  { grid-column: span 1; }
+.col-2  { grid-column: span 2; }
+.col-3  { grid-column: span 3; }
+.col-4  { grid-column: span 4; }
+.col-5  { grid-column: span 5; }
+.col-6  { grid-column: span 6; }
+.col-7  { grid-column: span 7; }
+.col-8  { grid-column: span 8; }
+.col-9  { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+@media (min-width: 480px) {
+  .col-sm-4  { grid-column: span 4; }
+  .col-sm-6  { grid-column: span 6; }
+  .col-sm-12 { grid-column: span 12; }
+}
+
+@media (min-width: 768px) {
+  .col-md-3  { grid-column: span 3; }
+  .col-md-4  { grid-column: span 4; }
+  .col-md-5  { grid-column: span 5; }
+  .col-md-6  { grid-column: span 6; }
+  .col-md-7  { grid-column: span 7; }
+  .col-md-8  { grid-column: span 8; }
+  .col-md-12 { grid-column: span 12; }
+}
+
+@media (min-width: 1024px) {
+  .col-lg-3  { grid-column: span 3; }
+  .col-lg-4  { grid-column: span 4; }
+  .col-lg-5  { grid-column: span 5; }
+  .col-lg-6  { grid-column: span 6; }
+  .col-lg-7  { grid-column: span 7; }
+  .col-lg-8  { grid-column: span 8; }
+  .col-lg-12 { grid-column: span 12; }
+}
+
+@media (min-width: 1280px) {
+  .col-xl-3  { grid-column: span 3; }
+  .col-xl-4  { grid-column: span 4; }
+  .col-xl-6  { grid-column: span 6; }
+  .col-xl-8  { grid-column: span 8; }
+
+  .grid { gap: var(--esp-5); }
+}
+
+/* Telas panorâmicas: container mais largo para não sobrar faixa vazia nas laterais */
+@media (min-width: 1440px) {
+  :root { --largura-maxima: 1320px; }
+
+  .col-xxl-3 { grid-column: span 3; }
+  .col-xxl-4 { grid-column: span 4; }
+  .col-xxl-6 { grid-column: span 6; }
+}
+
+/* Alinha o conteúdo das células no centro vertical */
+.grid-centro {
+  align-items: center;
+}
+
+/* ==========================================================================
+   CABEÇALHO (Flexbox: logo à esquerda, menu à direita)
+   ========================================================================== */
+
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-cabecalho);
+  background-color: var(--cor-superficie);
+  box-shadow: var(--sombra-sm);
+}
+
+.cabecalho-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  min-height: var(--altura-cabecalho);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-2);
+  margin: 0;
+  font-size: var(--fonte-base);
+  font-weight: var(--peso-forte);
+  color: var(--cor-primaria-escura);
+  text-decoration: none;
+}
+
+.marca img {
+  width: 40px;
+  height: 40px;
+}
+
+@media (min-width: 768px) {
+  .marca { font-size: var(--fonte-md); }
+  .marca img { width: 48px; height: 48px; }
+}
+
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================================== */
+
+.secao {
+  padding-block: var(--esp-6);
+}
+
+.secao-alternada {
+  background-color: var(--cor-superficie);
+}
+
+.secao-titulo {
+  max-width: 720px;
+  margin-bottom: var(--esp-5);
+}
+
+@media (min-width: 1024px) {
+  .secao { padding-block: var(--esp-7); }
+}
+
+/* Faixa de destaque do topo (hero) */
+.hero {
+  padding-block: var(--esp-6);
+  background: linear-gradient(135deg, var(--cor-primaria-escura), var(--cor-primaria));
+  color: var(--cor-superficie);
+}
+
+.hero h1 {
+  color: var(--cor-superficie);
+}
+
+.hero p {
+  font-size: var(--fonte-md);
+  max-width: 640px;
+}
+
+.hero .grupo-botoes {
+  margin-top: var(--esp-4);
+}
+
+@media (min-width: 1024px) {
+  .hero { padding-block: var(--esp-7); }
+}
+
+/* ==========================================================================
+   RODAPÉ (Grid: colunas de informação que viram uma só no celular)
+   ========================================================================== */
+
+.rodape {
+  padding-block: var(--esp-6) var(--esp-4);
+  background-color: var(--cor-texto);
+  color: #e4e7eb;
+}
+
+.rodape a {
+  color: #ffffff;
+}
+
+.rodape h2 {
+  font-size: var(--fonte-md);
+  color: #ffffff;
+}
+
+.rodape address {
+  font-style: normal;
+}
+
+.rodape-direitos {
+  margin-top: var(--esp-5);
+  padding-top: var(--esp-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240" role="img" aria-labelledby="titulo">
+  <title id="titulo">Ilustração de uma tigela de alimentos</title>
+  <rect width="400" height="240" fill="#e9f6ec"/>
+  <circle cx="170" cy="105" r="22" fill="#e5533d"/>
+  <circle cx="210" cy="95" r="22" fill="#f2c230"/>
+  <circle cx="245" cy="110" r="20" fill="#4caf50"/>
+  <path d="M110 120 H290 C290 170 250 195 200 195 C150 195 110 170 110 120 Z" fill="#2e7d4f"/>
+</svg>

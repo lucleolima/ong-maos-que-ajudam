@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300" role="img" aria-labelledby="titulo">
+  <title id="titulo">Ilustração de voluntários reunidos</title>
+  <rect width="600" height="300" fill="#e8f1fa"/>
+  <g fill="#1e6fb8">
+    <circle cx="180" cy="120" r="34"/>
+    <rect x="140" y="160" width="80" height="100" rx="30"/>
+    <circle cx="300" cy="105" r="38"/>
+    <rect x="255" y="148" width="90" height="112" rx="32"/>
+    <circle cx="420" cy="120" r="34"/>
+    <rect x="380" y="160" width="80" height="100" rx="30"/>
+  </g>
+</svg>
