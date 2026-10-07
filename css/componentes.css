@@ -175,6 +175,12 @@
     visibility: visible;
     transform: translateY(0);
   }
+
+  /* Fechado com Esc (js/modulos/menu.js), mesmo com o mouse ou o foco em cima */
+  .menu-item-com-submenu.submenu-fechado > .submenu {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 /* ==========================================================================
