@@ -44,6 +44,28 @@ export function iniciarMenu() {
     }
   });
 
+  iniciarSubmenus();
+}
+
+// No desktop o submenu abre no hover e no foco. A WCAG 1.4.13 pede que esse
+// conteúdo possa ser fechado sem mover o mouse ou o foco: Esc esconde o submenu
+// até o mouse ou o foco saírem do item.
+function iniciarSubmenus() {
+  document.querySelectorAll('.menu-item-com-submenu').forEach((item) => {
+    const reabrir = () => item.classList.remove('submenu-fechado');
+
+    item.addEventListener('keydown', (evento) => {
+      if (evento.key !== 'Escape' || item.classList.contains('submenu-fechado')) return;
+      item.classList.add('submenu-fechado');
+      item.querySelector('.menu-link').focus();
+    });
+
+    item.addEventListener('mouseleave', reabrir);
+    item.addEventListener('focusout', (evento) => {
+      if (!item.contains(evento.relatedTarget)) reabrir();
+    });
+  });
+
   // Ao voltar para tela grande, o estado do celular não fica preso
   window.matchMedia('(min-width: 768px)').addEventListener('change', fecharMenu);
 }

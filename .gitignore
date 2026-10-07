@@ -1,1 +1,11 @@
+# Dependências do npm (recriadas com npm install)
 node_modules/
+
+# Pasta gerada pelo build de produção (npm run build)
+dist/
+
+# Arquivos do sistema e de editores
+.DS_Store
+Thumbs.db
+.vscode/
+*.log

@@ -1,0 +1,177 @@
+/* ==========================================================================
+   TEMAS - modo escuro e alto contraste
+   Só redefinem as variáveis do design-system.css; os componentes não mudam.
+   Quem escolhe o tema é js/tema-inicial.js (antes da página aparecer, sem
+   "piscar" o tema claro) e os botões do cabeçalho (js/modulos/preferencias.js).
+     <html data-tema="escuro">      cores escuras (também segue o sistema operacional)
+     <html data-contraste="alto">   preto, branco e amarelo; vale por cima dos dois temas
+   Todas as combinações de texto foram medidas: no mínimo 4.5:1 (WCAG 1.4.3).
+   ========================================================================== */
+
+/* ---------- Modo escuro ---------- */
+:root[data-tema="escuro"] {
+  color-scheme: dark; /* barras de rolagem, select e calendário nativos também escurecem */
+
+  --cor-primaria: #6cb4f0;          /* 6.95:1 sobre a superfície */
+  --cor-primaria-escura: #9ccdf5;
+  --cor-primaria-clara: #17324d;
+  --cor-secundaria: #6fd39a;
+  --cor-secundaria-clara: #173826;
+  --cor-secundaria-escura: #8fe0b3;
+  --cor-destaque: #ffd166;
+  --cor-destaque-clara: #3a2f12;
+
+  --cor-sucesso: #6fd39a;
+  --cor-erro: #ff8a80;
+  --cor-erro-clara: #3d1a18;
+  --cor-erro-escura: #ffb4ab;
+  --cor-aviso: #ffcc66;
+  --cor-aviso-clara: #3a2f12;
+  --cor-info: #6cb4f0;
+
+  --cor-texto: #e4e7eb;             /* 12.48:1 sobre a superfície */
+  --cor-texto-suave: #a9b4c0;       /* 7.35:1 */
+  --cor-texto-inverso: #0b1a29;     /* texto escuro sobre os botões claros: 7.89:1 */
+  --cor-borda: #3e4c59;
+  --cor-borda-campo: #7b8794;       /* 4.23:1 */
+  --cor-fundo: #121820;
+  --cor-superficie: #1c2530;
+
+  --cor-foco: #ffd166;
+
+  --cor-rodape-fundo: #0b1016;
+  --cor-rodape-texto: #c5ccd3;
+  --cor-fundo-modal: rgba(0, 0, 0, 0.7);
+  --sombra-campo-foco: 0 0 0 3px rgba(108, 180, 240, 0.35);
+  --sombra-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --sombra-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --sombra-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- Alto contraste ---------- */
+:root[data-contraste="alto"] {
+  color-scheme: dark;
+
+  --cor-primaria: #ffff00;          /* 19.56:1 sobre o preto */
+  --cor-primaria-escura: #ffff00;
+  --cor-primaria-clara: #000000;
+  --cor-secundaria: #3dff8a;
+  --cor-secundaria-clara: #000000;
+  --cor-secundaria-escura: #3dff8a;
+  --cor-destaque: #ffff00;
+  --cor-destaque-clara: #000000;
+
+  --cor-sucesso: #3dff8a;
+  --cor-erro: #ff6b6b;
+  --cor-erro-clara: #000000;
+  --cor-erro-escura: #ff6b6b;
+  --cor-aviso: #ffff00;
+  --cor-aviso-clara: #000000;
+  --cor-info: #ffff00;
+
+  --cor-texto: #ffffff;             /* 21:1 */
+  --cor-texto-suave: #ffffff;
+  --cor-texto-inverso: #000000;
+  --cor-borda: #ffffff;
+  --cor-borda-campo: #ffffff;
+  --cor-fundo: #000000;
+  --cor-superficie: #000000;
+
+  --cor-foco: #00ffff;
+  --cor-foco-sobre-escuro: #00ffff;
+
+  --fundo-hero: #000000;
+  --cor-sobre-hero: #ffffff;
+  --cor-rodape-fundo: #000000;
+  --cor-rodape-texto: #ffffff;
+  --cor-rodape-destaque: #ffff00;
+  --cor-rodape-divisoria: #ffffff;
+  --cor-fundo-modal: rgba(0, 0, 0, 0.85);
+  --sombra-campo-foco: none;
+  --sombra-sm: none;
+  --sombra-md: none;
+  --sombra-lg: none;
+}
+
+/* Sem sombras e degradês, os limites das áreas precisam de borda */
+[data-contraste="alto"] .cabecalho,
+[data-contraste="alto"] .hero {
+  border-bottom: 2px solid var(--cor-borda);
+}
+
+[data-contraste="alto"] .rodape {
+  border-top: 2px solid var(--cor-borda);
+}
+
+[data-contraste="alto"] .modal,
+[data-contraste="alto"] .toast,
+[data-contraste="alto"] .submenu,
+[data-contraste="alto"] .menu,
+[data-contraste="alto"] .badge {
+  border: 2px solid var(--cor-borda);
+}
+
+/* Links sempre sublinhados: não dependem só da cor (WCAG 1.4.1) */
+[data-contraste="alto"] a:not(.botao) {
+  text-decoration: underline;
+}
+
+[data-contraste="alto"] .botao {
+  border-color: currentColor;
+}
+
+/* ==========================================================================
+   BOTÕES DE PREFERÊNCIA (cabeçalho)
+   ========================================================================== */
+
+.preferencias {
+  display: flex;
+  gap: var(--esp-1);
+}
+
+.botao-preferencia {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;  /* área de toque mínima recomendada */
+  height: 44px;
+  padding: 0;
+  font: inherit;
+  font-size: var(--fonte-md);
+  line-height: 1;
+  color: var(--cor-primaria-escura);
+  background: none;
+  border: 2px solid var(--cor-borda-campo);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: background-color var(--transicao), color var(--transicao);
+}
+
+.botao-preferencia:hover {
+  background-color: var(--cor-primaria-clara);
+}
+
+/* aria-pressed mostra o estado para o leitor de tela e para o CSS ao mesmo tempo */
+.botao-preferencia[aria-pressed="true"] {
+  color: var(--cor-texto-inverso);
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+
+.botao-preferencia svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Celular: menu absoluto sai do fluxo; preferências ficam antes do botão "Menu" */
+.marca {
+  margin-right: auto;
+}
+
+.preferencias { order: 1; }
+.botao-menu   { order: 2; }
+
+@media (min-width: 768px) {
+  .menu         { order: 1; }
+  .preferencias { order: 2; }
+}
