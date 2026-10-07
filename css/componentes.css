@@ -494,7 +494,7 @@
   font: inherit;
   color: var(--cor-texto);
   background-color: var(--cor-superficie);
-  border: 2px solid var(--cor-borda);
+  border: 2px solid var(--cor-borda-campo);
   border-radius: var(--raio-md);
   transition: border-color var(--transicao), box-shadow var(--transicao);
 }

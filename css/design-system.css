@@ -28,9 +28,16 @@
   /* ---------- Tons neutros ---------- */
   --cor-texto: #1f2933;
   --cor-texto-suave: #52606d;
-  --cor-borda: #cbd2d9;
+  --cor-borda: #cbd2d9;        /* só divisórias decorativas */
+  --cor-borda-campo: #7b8794;  /* contorno de campos: 3.66:1 no branco (WCAG 1.4.11 pede 3:1) */
   --cor-fundo: #f5f7fa;
   --cor-superficie: #ffffff;
+
+  /* ---------- Foco do teclado ----------
+     O laranja antigo (#f2a33a) tinha só 2.08:1 sobre o branco.
+     Azul escuro: 8.06:1 no branco; nas faixas escuras (hero e rodapé) vira amarelo. */
+  --cor-foco: #15528a;
+  --cor-foco-sobre-escuro: #ffd166;
 
   /* ---------- Tipografia ---------- */
   /* Fontes do sistema: carregam na hora, sem download extra */
@@ -160,10 +167,17 @@ a:hover {
   color: var(--cor-primaria-escura);
 }
 
-/* Foco visível para quem navega pelo teclado */
+/* Foco visível para quem navega pelo teclado (WCAG 2.4.7 e 1.4.11) */
 :focus-visible {
-  outline: 3px solid var(--cor-destaque);
+  outline: 3px solid var(--cor-foco);
   outline-offset: 2px;
+}
+
+/* Sobre fundo escuro o azul some: troca a variável só dentro dessas áreas */
+.hero,
+.rodape,
+.pular-conteudo {
+  --cor-foco: var(--cor-foco-sobre-escuro);
 }
 
 /* Respeita quem prefere menos animações */

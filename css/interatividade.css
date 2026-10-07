@@ -104,7 +104,7 @@ h1[tabindex="-1"]:focus,
   padding: var(--esp-2) var(--esp-3);
   font: inherit;
   background-color: var(--cor-superficie);
-  border: 2px solid var(--cor-borda);
+  border: 2px solid var(--cor-borda-campo);
   border-radius: var(--raio-md);
 }
 
