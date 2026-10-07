@@ -105,8 +105,11 @@ async function construirHtml() {
   html = html.replace(links[0], '<link rel="stylesheet" href="../css/estilos.min.css">');
   links.slice(1).forEach((link) => { html = html.replace(link, ''); });
 
+  // O script do tema tem menos de 0.5 KB e bloqueia a renderização: embutido no HTML
+  // economiza uma requisição antes da primeira pintura (por isso o JS é construído antes)
+  const temaInicial = (await readFile(`${DIST}/js/tema-inicial.min.js`, 'utf8')).trim();
   html = html
-    .replace('src="../js/tema-inicial.js"', 'src="../js/tema-inicial.min.js"')
+    .replace('<script src="../js/tema-inicial.js"></script>', () => `<script>${temaInicial}</script>`)
     .replace('src="../js/main.js"', 'src="../js/main.min.js"');
 
   const paginas = [['html/index.html', `${DIST}/html/index.html`], ['index.html', `${DIST}/index.html`]];
@@ -158,7 +161,8 @@ function kb(bytes) {
 const inicio = performance.now();
 await rm(DIST, { recursive: true, force: true });
 await mkdir(DIST, { recursive: true });
-await Promise.all([construirCss(), construirJs(), construirHtml(), construirImagens()]);
+await Promise.all([construirCss(), construirJs(), construirImagens()]);
+await construirHtml(); // depois do JS: embute o tema-inicial.min.js
 
 console.log(`\nBuild concluído em ${Math.round(performance.now() - inicio)} ms -> pasta ${DIST}/\n`);
 console.table(relatorio.map(({ tipo, antes, depois, gzip }) => ({

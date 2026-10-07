@@ -163,7 +163,10 @@
   height: 22px;
 }
 
-/* Celular: menu absoluto sai do fluxo; preferências ficam antes do botão "Menu" */
+/* A ordem visual do cabeçalho é a mesma do HTML (logo, "Menu", menu, preferências),
+   sem a propriedade order: assim o Tab percorre os itens na ordem em que aparecem (WCAG 2.4.3).
+   No celular o menu é absoluto e sai do fluxo; no desktop o botão "Menu" some. */
+
 /* Em 320px logo + botões de tema + "Menu" não cabiam com fontes um pouco mais
    largas (Linux, zoom de texto) e a página rolava na horizontal (WCAG 1.4.10).
    - flex-basis 0: o nome da ONG fica só com o espaço que sobrar (e quebra a linha do texto)
@@ -204,12 +207,4 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
   }
-}
-
-.preferencias { order: 1; }
-.botao-menu   { order: 2; }
-
-@media (min-width: 768px) {
-  .menu         { order: 1; }
-  .preferencias { order: 2; }
 }

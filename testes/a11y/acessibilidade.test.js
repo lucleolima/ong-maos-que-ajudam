@@ -105,19 +105,22 @@ test('Teclado: o primeiro Tab mostra "Pular para o conteúdo" e Enter leva o foc
 
 test('Teclado: o submenu abre com o foco e fecha com Esc, devolvendo o foco a "Projetos"', async () => {
   const pagina = await abrir('inicio');
-  const fimDasTransicoes = () => pagina.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished)));
-  const visibilidade = () => pagina.$eval('.submenu', (s) => getComputedStyle(s).visibility);
+  // Espera o estado em vez de ler na hora: logo depois da tecla o estilo pode ainda não ter
+  // sido recalculado (o teste falhava de vez em quando). Se não chegar em 2 s, falha.
+  const esperarVisibilidade = (valor) => pagina.waitForFunction(
+    (v) => getComputedStyle(document.querySelector('.submenu')).visibility === v,
+    { timeout: 2000 }, valor);
 
-  // Caminho real do teclado: foco em "Projetos" abre o submenu e o Tab entra nele
+  // Caminho real do teclado: foco em "Projetos" abre o submenu e o Tab entra nele.
+  // Esperar o submenu aparecer antes do Tab imita uma pessoa: apertando Tab no mesmo
+  // instante do foco, o navegador ainda não desenhou o submenu e pula para "Cadastro".
   await pagina.focus('.menu-link[data-rota="projetos"]');
+  await esperarVisibilidade('visible');
   await pagina.keyboard.press('Tab');
-  await fimDasTransicoes();
-  assert.equal(await visibilidade(), 'visible');
   assert.equal(await pagina.evaluate(() => document.activeElement.textContent), 'Aprender Juntos');
 
   await pagina.keyboard.press('Escape');
-  await fimDasTransicoes();
-  assert.equal(await visibilidade(), 'hidden');
+  await esperarVisibilidade('hidden');
   assert.equal(await pagina.evaluate(() => document.activeElement.dataset.rota), 'projetos');
   await pagina.close();
 });
@@ -133,6 +136,32 @@ test('Teclado: botões de tema funcionam com Espaço e informam o estado (aria-p
   }));
   assert.deepEqual(estado, { pressionado: 'true', tema: 'escuro', salvo: '"escuro"' });
   await pagina.close();
+});
+
+test('Teclado: o Tab percorre o cabeçalho na ordem visual (celular e desktop)', async () => {
+  for (const largura of [320, 1280]) {
+    const pagina = await abrir('inicio', TEMAS.claro, largura);
+    const posicoes = [];
+    for (let i = 0; i < 20; i += 1) {
+      await pagina.keyboard.press('Tab');
+      const atual = await pagina.evaluate(() => {
+        const el = document.activeElement;
+        if (!el.closest('.cabecalho')) return null;
+        const r = el.getBoundingClientRect();
+        return { nome: el.textContent.trim().slice(0, 20), esquerda: Math.round(r.left), topo: Math.round(r.top) };
+      });
+      if (posicoes.length && !atual) break;
+      if (atual) posicoes.push(atual);
+    }
+    await pagina.close();
+
+    // Cada item fica à direita do anterior ou numa linha abaixo (itens do submenu)
+    posicoes.slice(1).forEach((item, i) => {
+      const anterior = posicoes[i];
+      assert.ok(item.esquerda > anterior.esquerda || item.topo > anterior.topo,
+        `${largura}px: "${item.nome}" recebe foco depois de "${anterior.nome}", mas aparece antes dele`);
+    });
+  }
 });
 
 // A WCAG pede 320px; testar também 300px dá folga para fontes mais largas
