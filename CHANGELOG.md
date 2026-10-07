@@ -2,6 +2,12 @@
 
 Todas as mudanças relevantes do projeto. Formato baseado no [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e versões no [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.0.2] - 2026-10-07
+
+### Desempenho
+- O rodapé não pula mais quando a página carrega: o <main> reserva a altura da tela. CLS no Lighthouse mobile de 0.559 para 0.048.
+- Script do tema (menos de 0.5 KB) embutido no HTML pelo build, eliminando uma requisição que bloqueava a renderização.
+
 ## [1.0.1] - 2026-10-07
 
 ### Corrigido
@@ -33,6 +39,7 @@ Primeira versão de produção (Experiência Prática 4).
 
 Estado final da Experiência Prática 3: SPA em JavaScript com roteamento por hash, templates, validação de formulário, ViaCEP, localStorage e máscaras com IMask.
 
+[1.0.2]: https://github.com/lucleolima/ong-maos-que-ajudam/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/lucleolima/ong-maos-que-ajudam/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/lucleolima/ong-maos-que-ajudam/compare/v0.3.0...v1.0.0
 [0.3.0]: https://github.com/lucleolima/ong-maos-que-ajudam/releases/tag/v0.3.0
