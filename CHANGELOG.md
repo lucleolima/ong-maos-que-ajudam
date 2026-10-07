@@ -2,6 +2,12 @@
 
 Todas as mudanças relevantes do projeto. Formato baseado no [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e versões no [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [1.0.1] - 2026-10-07
+
+### Corrigido
+- Rolagem horizontal do cabeçalho em telas de 320px quando as fontes são um pouco mais largas, detectada pelo teste de reflow no GitHub Actions (Linux). O botão "Menu" mostra só o ícone abaixo de 400px e o texto continua disponível para leitores de tela.
+- Teste de reflow agora também verifica 300px, para ter folga entre sistemas operacionais.
+
 ## [1.0.0] - 2026-10-07
 
 Primeira versão de produção (Experiência Prática 4).
@@ -27,5 +33,6 @@ Primeira versão de produção (Experiência Prática 4).
 
 Estado final da Experiência Prática 3: SPA em JavaScript com roteamento por hash, templates, validação de formulário, ViaCEP, localStorage e máscaras com IMask.
 
+[1.0.1]: https://github.com/lucleolima/ong-maos-que-ajudam/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/lucleolima/ong-maos-que-ajudam/compare/v0.3.0...v1.0.0
 [0.3.0]: https://github.com/lucleolima/ong-maos-que-ajudam/releases/tag/v0.3.0
