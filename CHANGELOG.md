@@ -8,6 +8,9 @@ Todas as mudanças relevantes do projeto. Formato baseado no [Keep a Changelog](
 - O rodapé não pula mais quando a página carrega: o <main> reserva a altura da tela. CLS no Lighthouse mobile de 0.559 para 0.048.
 - Script do tema (menos de 0.5 KB) embutido no HTML pelo build, eliminando uma requisição que bloqueava a renderização.
 
+### Corrigido
+- Ordem do foco do cabeçalho no celular: os botões de tema apareciam antes do botão Menu, mas recebiam o foco depois (WCAG 2.4.3). Novo teste automático compara a ordem do Tab com a posição na tela.
+
 ## [1.0.1] - 2026-10-07
 
 ### Corrigido
