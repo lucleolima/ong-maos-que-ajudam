@@ -1,0 +1,8 @@
+# Normaliza o fim de linha para LF em todos os arquivos de texto (Windows usa CRLF)
+* text=auto eol=lf
+
+# Arquivos binários: o Git não deve tentar converter
+*.png binary
+*.jpg binary
+*.webp binary
+*.avif binary
