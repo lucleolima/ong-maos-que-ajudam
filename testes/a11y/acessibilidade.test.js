@@ -135,6 +135,32 @@ test('Teclado: botões de tema funcionam com Espaço e informam o estado (aria-p
   await pagina.close();
 });
 
+test('Teclado: o Tab percorre o cabeçalho na ordem visual (celular e desktop)', async () => {
+  for (const largura of [320, 1280]) {
+    const pagina = await abrir('inicio', TEMAS.claro, largura);
+    const posicoes = [];
+    for (let i = 0; i < 20; i += 1) {
+      await pagina.keyboard.press('Tab');
+      const atual = await pagina.evaluate(() => {
+        const el = document.activeElement;
+        if (!el.closest('.cabecalho')) return null;
+        const r = el.getBoundingClientRect();
+        return { nome: el.textContent.trim().slice(0, 20), esquerda: Math.round(r.left), topo: Math.round(r.top) };
+      });
+      if (posicoes.length && !atual) break;
+      if (atual) posicoes.push(atual);
+    }
+    await pagina.close();
+
+    // Cada item fica à direita do anterior ou numa linha abaixo (itens do submenu)
+    posicoes.slice(1).forEach((item, i) => {
+      const anterior = posicoes[i];
+      assert.ok(item.esquerda > anterior.esquerda || item.topo > anterior.topo,
+        `${largura}px: "${item.nome}" recebe foco depois de "${anterior.nome}", mas aparece antes dele`);
+    });
+  }
+});
+
 // A WCAG pede 320px; testar também 300px dá folga para fontes mais largas
 // (no Linux do GitHub Actions o cabeçalho estourava 10px e no Windows não)
 test('Reflow: nenhuma página rola na horizontal com 320px de largura (zoom de 400%)', async () => {
