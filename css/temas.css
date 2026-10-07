@@ -164,8 +164,46 @@
 }
 
 /* Celular: menu absoluto sai do fluxo; preferências ficam antes do botão "Menu" */
+/* Em 320px logo + botões de tema + "Menu" não cabiam com fontes um pouco mais
+   largas (Linux, zoom de texto) e a página rolava na horizontal (WCAG 1.4.10).
+   - flex-basis 0: o nome da ONG fica só com o espaço que sobrar (e quebra a linha do texto)
+   - abaixo de 400px o botão "Menu" mostra só o ícone; o texto continua para o leitor de tela
+   - flex-wrap: rede de segurança para fontes muito grandes */
+.cabecalho-conteudo {
+  flex-wrap: wrap;
+  row-gap: var(--esp-2);
+}
+
 .marca {
-  margin-right: auto;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.marca picture,
+.marca img {
+  flex-shrink: 0; /* quem encolhe é o texto, não o logo */
+}
+
+@media (max-width: 399px) {
+  .cabecalho-conteudo {
+    column-gap: var(--esp-2);
+  }
+
+  .botao-menu {
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .botao-menu-texto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
 }
 
 .preferencias { order: 1; }
