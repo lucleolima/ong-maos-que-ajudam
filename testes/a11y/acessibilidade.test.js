@@ -135,11 +135,15 @@ test('Teclado: botões de tema funcionam com Espaço e informam o estado (aria-p
   await pagina.close();
 });
 
+// A WCAG pede 320px; testar também 300px dá folga para fontes mais largas
+// (no Linux do GitHub Actions o cabeçalho estourava 10px e no Windows não)
 test('Reflow: nenhuma página rola na horizontal com 320px de largura (zoom de 400%)', async () => {
-  for (const rota of ROTAS) {
-    const pagina = await abrir(rota, TEMAS.claro, 320);
-    const largura = await pagina.evaluate(() => document.documentElement.scrollWidth);
-    await pagina.close();
-    assert.ok(largura <= 320, `#/${rota} tem ${largura}px de largura`);
+  for (const largura of [320, 300]) {
+    for (const rota of ROTAS) {
+      const pagina = await abrir(rota, TEMAS.claro, largura);
+      const larguraDaPagina = await pagina.evaluate(() => document.documentElement.scrollWidth);
+      await pagina.close();
+      assert.ok(larguraDaPagina <= largura, `#/${rota} tem ${larguraDaPagina}px numa tela de ${largura}px`);
+    }
   }
 });

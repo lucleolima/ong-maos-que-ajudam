@@ -1,6 +1,6 @@
 {
   "name": "ong-maos-que-ajudam",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Site da ONG Mãos que Ajudam: SPA acessível (WCAG 2.1 AA) com build e deploy automatizados",
   "private": true,
   "type": "module",
