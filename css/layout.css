@@ -148,6 +148,14 @@
    CONTEÚDO PRINCIPAL
    ========================================================================== */
 
+/* O <main> começa vazio e o JavaScript o preenche; sem altura mínima o rodapé
+   aparecia no topo e "pulava" para baixo (CLS de 0.56 no Lighthouse).
+   svh = altura visível no celular, descontando as barras do navegador */
+#conteudo {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
 .secao {
   padding-block: var(--esp-6);
 }
