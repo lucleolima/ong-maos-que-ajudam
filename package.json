@@ -7,10 +7,17 @@
   "scripts": {
     "test": "node --test \"testes/*.test.js\"",
     "start": "node scripts/servidor.js . 5500",
-    "test:a11y": "node --test testes/a11y/acessibilidade.test.js"
+    "test:a11y": "node --test testes/a11y/acessibilidade.test.js",
+    "build": "node scripts/build.js",
+    "preview": "node scripts/servidor.js dist 5501",
+    "test:a11y:dist": "node --test testes/a11y/dist.test.js"
   },
   "devDependencies": {
     "axe-core": "^4.14.0",
-    "puppeteer-core": "^24.43.1"
+    "esbuild": "^0.28.2",
+    "html-minifier-terser": "^7.2.0",
+    "puppeteer-core": "^24.43.1",
+    "sharp": "^0.35.5",
+    "svgo": "^4.1.0"
   }
 }
