@@ -1,7 +1,7 @@
 {
-  "name": "ong-maos-que-ajudam-js",
+  "name": "ong-maos-que-ajudam",
   "version": "3.0.0",
-  "description": "SPA da ONG Mãos que Ajudam (Experiência Prática 3 de Desenvolvimento Front-End)",
+  "description": "Site da ONG Mãos que Ajudam: SPA acessível (WCAG 2.1 AA) com build e deploy automatizados",
   "private": true,
   "type": "module",
   "scripts": {
@@ -19,5 +19,13 @@
     "puppeteer-core": "^24.43.1",
     "sharp": "^0.35.5",
     "svgo": "^4.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucleolima/ong-maos-que-ajudam.git"
+  },
+  "homepage": "https://lucleolima.github.io/ong-maos-que-ajudam/",
+  "engines": {
+    "node": ">=20"
   }
 }
